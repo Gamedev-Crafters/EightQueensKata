@@ -3,13 +3,20 @@
  * 2. None of them should be able to capture any other
  */
 
+using FluentAssertions;
+
 namespace EightQueensKata.Tests;
 
 public class EightQueensTest
 {
     [Fact]
-    public void Test1()
+    public void Place_A_Queen_On_The_Chessboard()
     {
+        var sut = new int[8,8];
+        sut[0, 0] = 1;
 
+        var isTheQueenPlaced = sut[0, 0] == 1;
+
+        isTheQueenPlaced.Should().Be(true);
     }
 }
