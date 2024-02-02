@@ -21,6 +21,16 @@ public class EightQueensTest
         sut.IsQueenAt(xCoordinate,yCoordinate).Should().Be(expected);
     }
 
+    [Fact]
+    public void Initialized_Chessboard_Has_Eight_Queens()
+    {
+        var sut = new Chessboard();
+
+        sut.Initialize();
+
+        sut.QueensCount().Should().Be(8);
+    }
+
     private class PlaceAQueenTestData : IEnumerable<object[]>
     {
         private readonly List<object[]> _data = new List<object[]>
