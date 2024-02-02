@@ -43,4 +43,9 @@ public class Chessboard
 
         return queenCounter;
     }
+
+    public bool ArePlacedQueensInEachOthersRange()
+    {
+        throw new NotImplementedException();
+    }
 }
