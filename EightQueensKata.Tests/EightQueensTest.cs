@@ -12,11 +12,10 @@ public class EightQueensTest
     [Fact]
     public void Place_A_Queen_On_The_Chessboard()
     {
-        var sut = new int[8,8];
-        sut[0, 0] = 1;
+        var sut = new Chessboard();
+        
+        sut.PlaceQueenAt(0,0);
 
-        var isTheQueenPlaced = sut[0, 0] == 1;
-
-        isTheQueenPlaced.Should().Be(true);
+        sut.IsQueenAt(0,0).Should().Be(true);
     }
 }
