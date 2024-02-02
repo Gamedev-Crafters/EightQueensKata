@@ -3,19 +3,36 @@
  * 2. None of them should be able to capture any other
  */
 
+using System.Collections;
 using FluentAssertions;
 
 namespace EightQueensKata.Tests;
 
 public class EightQueensTest
 {
-    [Fact]
-    public void Place_A_Queen_On_The_Chessboard()
+    [Theory]
+    [ClassData(typeof(PlaceAQueenTestData))]
+    public void Place_A_Queen_On_The_Chessboard(int xCoordinate, int yCoordinate, bool expected)
     {
         var sut = new Chessboard();
         
-        sut.PlaceQueenAt(0,0);
+        sut.PlaceQueenAt(xCoordinate,yCoordinate);
 
-        sut.IsQueenAt(0,0).Should().Be(true);
+        sut.IsQueenAt(xCoordinate,yCoordinate).Should().Be(expected);
+    }
+
+    private class PlaceAQueenTestData : IEnumerable<object[]>
+    {
+        private readonly List<object[]> _data = new List<object[]>
+        {
+            new object[] { 1, 1, true },
+            new object[] { 0, 0, true },
+            new object[] { 2, 3, true },
+            new object[] { 3, 7, true },
+        };
+
+        public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }
