@@ -63,10 +63,28 @@ public class Chessboard
 
     private bool IsAnotherQueenInRange(int xCoordinate, int yCoordinate)
     {
+        if (CheckForSquareRange(xCoordinate, yCoordinate)) return true;
+        
         if (CheckForDiagonalRange(xCoordinate, yCoordinate)) return true;
 
         if (CheckForHorizontalAndVerticalRange(xCoordinate, yCoordinate)) return true;
         
+        return false;
+    }
+
+    private bool CheckForSquareRange(int xCoordinate, int yCoordinate)
+    {
+        for (var x = xCoordinate - 1; x <= xCoordinate + 1; x++)
+        {
+            for (var y = yCoordinate - 1; y <= yCoordinate + 1; y++)
+            {
+                if (x == xCoordinate && y == yCoordinate) continue;
+                if (!IsInsideBounds(x, y)) continue;
+                if (IsQueenAt(x, y))
+                    return true;
+            }
+        }
+
         return false;
     }
 
@@ -76,6 +94,7 @@ public class Chessboard
         for (int x = xCoordinate - 1, y = yCoordinate + 1; x >= 0 && y < _board.GetLength(1); x--, y++)
         {
             if (x == xCoordinate && y == yCoordinate) continue;
+            if(!IsInsideBounds(x, y)) continue;
             if (IsQueenAt(x, y))
             {
                 return true;
@@ -86,6 +105,7 @@ public class Chessboard
         for (int x = xCoordinate - 1, y = yCoordinate - 1; x >= 0 && y >= 0; x--, y--)
         {
             if (x == xCoordinate && y == yCoordinate) continue;
+            if(!IsInsideBounds(x, y)) continue;
             if (IsQueenAt(x, y))
             {
                 return true;
@@ -97,20 +117,32 @@ public class Chessboard
 
     private bool CheckForHorizontalAndVerticalRange(int xCoordinate, int yCoordinate)
     {
+        // Verificar la vertical
         for (var x = 0; x < _board.GetLength(0); x++)
         {
             if (x == xCoordinate) continue;
+            if(!IsInsideBounds(x, yCoordinate)) continue;
             if (IsQueenAt(x, yCoordinate))
                 return true;
         }
 
-        for (var y = 0; y < _board.GetLength(0); y++)
+        // Verificar la horizontal
+        for (var y = 0; y < _board.GetLength(1); y++)
         {
             if (y == yCoordinate) continue;
+            if(!IsInsideBounds(xCoordinate, y)) continue;
             if (IsQueenAt(xCoordinate, y))
                 return true;
         }
 
         return false;
+    }
+    
+    private bool IsInsideBounds(int x, int y)
+    {
+        return x >= 0 && 
+               y >= 0 && 
+               x < _board.GetLength(0) && 
+               y < _board.GetLength(1);
     }
 }
