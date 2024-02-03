@@ -32,13 +32,13 @@ public class EightQueensTest
     }
     
     [Fact]
-    public void Queens_Should_Not_Capture_Each_Other()
+    public void Queens_Should_Not_Be_Able_To_Capture_Each_Other_When_Game_Starts()
     {
         var sut = new Chessboard();
 
         sut.Initialize();
 
-        sut.ArePlacedQueensInEachOthersRange().Should().Be(false);
+        sut.HaveQueensAnyOtherQueenInRange().Should().Be(false);
     }
 
     private class PlaceAQueenTestData : IEnumerable<object[]>
