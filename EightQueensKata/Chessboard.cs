@@ -63,6 +63,18 @@ public class Chessboard
 
     private bool IsAnotherQueenInRange(int xCoordinate, int yCoordinate)
     {
+        for (var x = 0; x < _board.GetLength(0); x++)
+        {
+            if(x == xCoordinate) continue;
+            if (IsQueenAt(x, yCoordinate))
+                return true;
+        }
+        for (var y = 0; y < _board.GetLength(0); y++)
+        {
+            if(y == yCoordinate) continue;
+            if (IsQueenAt(xCoordinate, y))
+                return true;
+        }
         return false;
     }
 }
