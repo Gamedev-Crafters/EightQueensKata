@@ -46,6 +46,23 @@ public class Chessboard
 
     public bool HaveQueensAnyOtherQueenInRange()
     {
-        throw new NotImplementedException();
+        for (var i = 0; i < _board.GetLength(0); i++)
+        {
+            for (var j = 0; j < _board.GetLength(1); j++)
+            {
+                if(!IsQueenAt(i, j)) continue;
+                if (IsAnotherQueenInRange(i, j))
+                {
+                    return true;
+                }
+            }   
+        }
+
+        return false;
+    }
+
+    private bool IsAnotherQueenInRange(int xCoordinate, int yCoordinate)
+    {
+        return false;
     }
 }
